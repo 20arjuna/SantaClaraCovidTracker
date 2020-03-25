@@ -52,6 +52,7 @@ def addCasesToFile(cases):
     infectedFile.close()
 
 def executeEverything():
+    print("running executeEverything()")
     cases = getCases()
     addCasesToFile(cases)
     plotGraph()
