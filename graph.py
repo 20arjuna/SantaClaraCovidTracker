@@ -2,6 +2,8 @@ import matplotlib.pyplot as p
 import numpy as np
 import requests
 from datetime import date
+import schedule
+import time
 
 
 def plotGraph():
@@ -49,7 +51,13 @@ def addCasesToFile(cases):
     daysFile.close()
     infectedFile.close()
 
-if __name__ == '__main__':
+def executeEverything():
     cases = getCases()
     addCasesToFile(cases)
     plotGraph()
+
+if __name__ == '__main__':
+    schedule.every().day.at("18:00").do(executeEverything)
+    while True:
+        schedule.run_pending()
+        time.sleep(60) # wait one minute
