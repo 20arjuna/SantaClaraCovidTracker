@@ -1,6 +1,8 @@
 import matplotlib.pyplot as p
 import numpy as np
 import requests
+from datetime import date
+
 
 def plotGraph():
 
@@ -31,11 +33,23 @@ def getCases():
     r = requests.get("https://www.sccgov.org/sites/phd/DiseaseInformation/novel-coronavirus/Pages/home.aspx")
     sourceCode = r.text
     index = sourceCode.find("Total_Confirmed_Cases")
-    cases = int(sourceCode[index+24:index+27])
+    cases = int(sourceCode[index+24:index+27]) #Gets the cases number from the html code
     return cases
 
+def addCasesToFile(cases):
+    today = str(date.today())
+    today = today[6:] #Strips the year away from date format
+
+    daysFile = open("days.txt", "a")
+    infectedFile = open("infected.txt", "a")
+
+    daysFile.write(today+"\n")
+    infectedFile.write(str(cases))
+
+    daysFile.close()
+    infectedFile.close()
 
 if __name__ == '__main__':
     cases = getCases()
-    print(cases)
+    addCasesToFile(cases)
     plotGraph()
