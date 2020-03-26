@@ -58,7 +58,7 @@ def executeEverything():
     plotGraph()
 
 if __name__ == '__main__':
-    schedule.every().day.at("18:00").do(executeEverything)
+    schedule.every().day.at("03:00").do(executeEverything)
     while True:
         schedule.run_pending()
         time.sleep(60) # wait one minute
